@@ -109,7 +109,7 @@ public class Move : MonoBehaviour
         Camera.main.transform.position = Checker.chess[turns].transform.position + new Vector3(cameraX, 1, cameraZ);
         CameraMovement.setCameraPos(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
         ChessMovement.setTurns(turns);
-        UpdateChessDestination(step);
+        UpdateChessDestination(turns, step);
         CameraMovement.setCameraPos(Checker.steps[step].transform.position.x + cameraX, Checker.steps[step].transform.position.y + 1, Checker.steps[step].transform.position.z + cameraZ);
         moved = true;
         Dice.canMove = false;
@@ -120,16 +120,22 @@ public class Move : MonoBehaviour
         /*Camera.main.transform.position = new Vector3(Checker.chess[turns].transform.position.x + cameraX, 4, Checker.chess[turns].transform.position.z + cameraZ);*/
 
     }
-    async void UpdateChessDestination(int index)
+    async void UpdateChessDestination(int index, int step)
     {
-        int count = index - Dice.diceValue;
-        Debug.Log(count);
-        do
+        bool arrived = false;
+        int count = step - Dice.diceValue;
+        while(count != step)
         {
-            ChessMovement.setDestination(Checker.steps[++count].transform.position);
-            ChessMovement.timeToMove = true;
-            await Task.Delay(1000);
-        } while (count != index);
+            count++;
+            while (!arrived)
+            {
+                ChessMovement.setDestination(Checker.steps[count].transform.position);
+                ChessMovement.timeToMove = true;
+                await Task.Delay(1000);
+                arrived = true;
+            }
+            arrived = false;
+        }
         ChessMovement.timeToMove = false;
     }
 
