@@ -1,0 +1,514 @@
+# Aspose.3D Wavefront OBJ Exporter
+# Copyright 2004-2022 Aspose Pty Ltd.
+# File created: 08/26/2022 12:30:17
+
+newmtl Material_100
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\5.png
+	map_Ks \textures\6.png
+newmtl Material_101
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\7.png
+	map_Ks \textures\8.png
+newmtl Material_102
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\9.png
+	map_Ks \textures\10.png
+newmtl Material_103
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\11.png
+	map_Ks \textures\10.png
+newmtl Material_104
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\12.png
+	map_Ks \textures\10.png
+newmtl Material_105
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\13.png
+	map_Ks \textures\14.png
+newmtl Material_106
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\15.png
+	map_Ks \textures\16.png
+newmtl Material_107
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\17.png
+	map_Ks \textures\18.png
+newmtl Material_108
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\19.png
+	map_Ks \textures\20.png
+newmtl Material_109
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\17.png
+	map_Ks \textures\18.png
+newmtl Material_110
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\21.png
+	map_Ks \textures\8.png
+newmtl Material_111
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\19.png
+	map_Ks \textures\20.png
+newmtl Material_112
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\22.png
+	map_Ks \textures\8.png
+newmtl Material_113
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\17.png
+	map_Ks \textures\18.png
+newmtl Material_114
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\19.png
+	map_Ks \textures\20.png
+newmtl Material_115
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\7.png
+	map_Ks \textures\8.png
+newmtl Material_116
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\19.png
+	map_Ks \textures\20.png
+newmtl Material_117
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\17.png
+	map_Ks \textures\18.png
+newmtl Material_118
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\21.png
+	map_Ks \textures\8.png
+newmtl Material_119
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\19.png
+	map_Ks \textures\24.png
+newmtl Material_120
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\25.png
+	map_Ks \textures\26.png
+newmtl Material_121
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\27.png
+	map_Ks \textures\28.png
+newmtl Material_122
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\29.png
+	map_Ks \textures\30.png
+newmtl Material_123
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\25.png
+	map_Ks \textures\26.png
+newmtl Material_124
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\27.png
+	map_Ks \textures\28.png
+newmtl Material_125
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\29.png
+	map_Ks \textures\30.png
+newmtl Material_126
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\25.png
+	map_Ks \textures\26.png
+newmtl Material_127
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\27.png
+	map_Ks \textures\28.png
+newmtl Material_128
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\29.png
+	map_Ks \textures\30.png
+newmtl Material_129
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\25.png
+	map_Ks \textures\26.png
+newmtl Material_130
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\27.png
+	map_Ks \textures\28.png
+newmtl Material_131
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\29.png
+	map_Ks \textures\30.png
+newmtl Material_132
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\25.png
+	map_Ks \textures\26.png
+newmtl Material_133
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\27.png
+	map_Ks \textures\28.png
+newmtl Material_134
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\29.png
+	map_Ks \textures\30.png
+newmtl Material_135
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\13.png
+	map_Ks \textures\14.png
+newmtl Material_136
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\13.png
+	map_Ks \textures\14.png
+newmtl Material_137
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\31.png
+	map_Ks \textures\24.png
+newmtl Material_138
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\7.png
+	map_Ks \textures\8.png
+newmtl Material_139
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\32.png
+	map_Ks \textures\8.png
+newmtl Material_140
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\33.png
+	map_Ks \textures\8.png
+newmtl Material_141
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\19.png
+	map_Ks \textures\20.png
+newmtl Material_142
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\34.png
+	map_Ks \textures\14.png
+newmtl Material_143
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\35.png
+	map_Ks \textures\8.png
+newmtl Material_144
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\36.png
+	map_Ks \textures\37.png
+newmtl Material_145
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\38.png
+	map_Ks \textures\8.png
+newmtl Material_146
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\39.png
+	map_Ks \textures\8.png
+newmtl Material_147
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\40.png
+	map_Ks \textures\20.png
+newmtl Material_148
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\41.png
+	map_Ks \textures\20.png
+newmtl Material_149
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\42.png
+	map_Ks \textures\18.png
+newmtl Material_150
+	Ka 0.2 0.2 0.2
+	Kd 1 1 1
+	d 1
+	Tr 0
+	illum 2
+	Ks 1 1 1
+	Ns 11986900
+	map_Kd \textures\17.png
+	map_Ks \textures\18.png

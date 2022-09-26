@@ -1,0 +1,113 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class UIController : MonoBehaviour
+{
+    [SerializeField] GameObject obj;
+    [SerializeField] GameObject answer;
+    [SerializeField] GameObject question;
+    [SerializeField] GameObject btn_ShowAnswer;
+    [SerializeField] GameObject btn_Correct;
+    [SerializeField] GameObject btn_Wrong;
+    [SerializeField] GameObject messageBox;
+    public Text turnTemp;
+    public Text message;
+    public static Text turn;
+    public static bool checkedAnswer = false;
+
+    void Start()
+    {
+        turn = turnTemp;
+    }
+    void Update()
+    {
+        if(Move.reset == true)
+        {
+            question.SetActive(true);
+            answer.SetActive(false);
+            btn_ShowAnswer.SetActive(true);
+            btn_Correct.SetActive(false);
+            btn_Wrong.SetActive(false);
+            messageBox.SetActive(false);
+            Move.reset = false;
+        }
+    }
+    public void switchScene(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
+    public void setPlayerNum(int num)
+    {
+        PlayerPrefs.SetInt("playerNum", num);
+    }
+    public void setActice(bool x)
+    {
+        obj.SetActive(x);
+    }
+    public async void Correct()
+    {
+        if (Move.turn == 0)
+        {
+            LoadExcel.p1Score++;
+
+        }else if(Move.turn == 1)
+        {
+            LoadExcel.p2Score++;
+        }else if(Move.turn == 2)
+        {
+            LoadExcel.p3Score++;
+        }else if(Move.turn == 3)
+        {
+            LoadExcel.p4Score++;
+        }
+        message.text = "Correct! +1 Score.";
+        answer.SetActive(false);
+        btn_Correct.SetActive(false);
+        btn_Wrong.SetActive(false);
+        messageBox.SetActive(true);
+        await Task.Delay(2000);
+        checkedAnswer = true;
+        Move.answered = true;
+    }
+    public void Wrong()
+    {
+        answer.SetActive(false);
+        btn_Correct.SetActive(false);
+        btn_Wrong.SetActive(false);
+        messageBox.SetActive(true);
+        message.text = "Ops! You wrong.";
+        checkedAnswer = true;
+        Move.answered = true;
+    }
+    public void checkAnser()
+    {
+        question.SetActive(false);
+        answer.SetActive(true);
+        btn_ShowAnswer.SetActive(false);
+        btn_Correct.SetActive(true);
+        btn_Wrong.SetActive(true);
+    }
+    public static void changeTurnText(int turns)
+    {
+        if(turns == 0)
+        {
+            turn.text = "Red";
+        }
+        if(turns == 1)
+        {
+            turn.text = "Yellow";
+        }
+        if(turns == 2)
+        {
+            turn.text = "Blue";
+        }
+        if(turns == 3)
+        {
+            turn.text = "Green";
+        }
+    }
+}
