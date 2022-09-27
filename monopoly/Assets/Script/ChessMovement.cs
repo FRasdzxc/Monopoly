@@ -22,8 +22,8 @@ public class ChessMovement : MonoBehaviour
         if(timeToMove == true)
         {
             animation += Time.deltaTime;
-            animation = animation % 1f;
-            Checker.chess[turns].transform.position = MathParabola.Parabola(Checker.chess[turns].transform.position, destination, 0.5f, animation / 1f);
+            animation = animation % 0.5f;
+            Checker.chess[turns].transform.position = MathParabola.Parabola(Checker.chess[turns].transform.position, destination, 0.5f, animation / 0.5f);
         }
             /*Checker.chess[turns].transform.position = Vector3.Lerp(Checker.chess[turns].transform.position, destination, pLerp);*/ //Move in a straight line
     }

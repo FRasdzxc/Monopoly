@@ -24,6 +24,7 @@ public class Move : MonoBehaviour
     public static bool reset = false;
     public static bool answered = false;
     public static bool showQuestion = false;
+    public static bool arrived = false;
     public int waitSecond;
     int playerNum;
     void Start()
@@ -122,17 +123,16 @@ public class Move : MonoBehaviour
     }
     async void UpdateChessDestination(int index, int step)
     {
-        bool arrived = false;
+        arrived = false;
         int count = step - Dice.diceValue;
         while(count != step)
         {
             count++;
+            ChessMovement.setDestination(Checker.steps[count].transform.position);
+            ChessMovement.timeToMove = true;
             while (!arrived)
             {
-                ChessMovement.setDestination(Checker.steps[count].transform.position);
-                ChessMovement.timeToMove = true;
-                await Task.Delay(1000);
-                arrived = true;
+                await Task.Delay(1);
             }
             arrived = false;
         }

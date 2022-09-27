@@ -95,6 +95,14 @@ public class CheckCollision : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "checker")
+        {
+            Debug.Log("HELLO");
+            Move.arrived = true;
+        }
+    }
     public static void setAllActive()
     {
         p1.SetActive(true);
