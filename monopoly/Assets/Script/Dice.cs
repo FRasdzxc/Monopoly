@@ -35,7 +35,7 @@ public class Dice : MonoBehaviour
             x = Camera.main.transform.position.x;
             y = Camera.main.transform.position.y;
             z = Camera.main.transform.position.z;
-            CameraMovement.setCameraPos(x, y - 7, z); //Camera Zoom In
+            CameraMovement.setCameraPos(new Vector3(x, y - 7, z)); //Camera Zoom In
             rollButton.SetActive(false);
             turnPanel.SetActive(false);
             scoreboardPanel.SetActive(false);

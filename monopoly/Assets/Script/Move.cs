@@ -12,12 +12,7 @@ public class Move : MonoBehaviour
     public Vector3 cameraAtChessPos;
     public Vector3 cameraAngle;
     public static int turn = 0;
-    float x;
-    float y;
-    float z;
     int cameraY = 0;
-    int cameraX = 0;
-    int cameraZ = 0;
     public static int pos;
     private int[] currPos = new int[4];
     bool moved = false;
@@ -29,8 +24,7 @@ public class Move : MonoBehaviour
     int playerNum;
     void Start()
     {
-        cameraPos = Camera.main.transform.position;
-        cameraAtChessPos = new Vector3(0,1,2);
+        CameraUpdate(CameraMovement.cameraStartingPos.transform.position);
         cameraAngle = Camera.main.transform.eulerAngles;
         playerNum = PlayerPrefs.GetInt("playerNum");
         for(int i = 0; i < playerNum; i++)
@@ -53,30 +47,21 @@ public class Move : MonoBehaviour
             if(currPos[turn] > 39)
             {
                 currPos[turn] = currPos[turn] - 39;
-                cameraY = 180;
             }
             if (currPos[turn] > 10 && currPos[turn] <= 20)
             {
-                cameraX = 2;
-                cameraZ = 0;
                 cameraY = 270;
             }
             else if (currPos[turn] > 20 && currPos[turn] <= 30)
             {
-                cameraX = 0;
-                cameraZ = -2;
                 cameraY = 0;
             }
             else if (currPos[turn] > 30 && currPos[turn] <= 39)
             {
-                cameraX = -2;
-                cameraZ = 0;
                 cameraY = 90;
             }
             else if (currPos[turn] >= 0 && currPos[turn] <= 10)
             {
-                cameraX = 0;
-                cameraZ = 2;
                 cameraY = 180;
             }
             pos = currPos[turn];
@@ -103,15 +88,9 @@ public class Move : MonoBehaviour
     {
 
         Camera.main.transform.eulerAngles = new Vector3(30, cameraY, 0);
-        Camera.main.transform.SetParent(Checker.chess[turns].transform);
-        x = Checker.chess[turns].transform.position.x;
-        y = Checker.chess[turns].transform.position.y;
-        z = Checker.chess[turns].transform.position.z;
-        Camera.main.transform.position = Checker.chess[turns].transform.position + new Vector3(cameraX, 1, cameraZ);
-        CameraMovement.setCameraPos(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
+        CameraMovement.setCameraPos(CameraMovement.cameraStartingPos.transform.position);
         ChessMovement.setTurns(turns);
         UpdateChessDestination(turns, step);
-        CameraMovement.setCameraPos(Checker.steps[step].transform.position.x + cameraX, Checker.steps[step].transform.position.y + 1, Checker.steps[step].transform.position.z + cameraZ);
         moved = true;
         Dice.canMove = false;
         await Task.Delay(2500);
@@ -129,14 +108,36 @@ public class Move : MonoBehaviour
         {
             count++;
             ChessMovement.setDestination(Checker.steps[count].transform.position);
+            if (currPos[turn] > 10 && currPos[turn] <= 20)
+            {
+                CameraUpdate(CameraMovement.cameraPos2.transform.position);
+            }
+            else if (currPos[turn] > 20 && currPos[turn] <= 30)
+            {
+                CameraUpdate(CameraMovement.cameraPos3.transform.position);
+            }
+            else if (currPos[turn] > 30 && currPos[turn] <= 39)
+            {
+                CameraUpdate(CameraMovement.cameraPos4.transform.position);
+            }
+            else if (currPos[turn] >= 0 && currPos[turn] <= 10)
+            {
+                CameraUpdate(CameraMovement.cameraPos1.transform.position);
+            }
             ChessMovement.timeToMove = true;
             while (!arrived)
             {
                 await Task.Delay(1);
             }
+            Checker.chess[index].transform.position = ChessMovement.destination;
             arrived = false;
         }
         ChessMovement.timeToMove = false;
+    }
+
+    void CameraUpdate(Vector3 x)
+    {
+        CameraMovement.setCameraPos(x);
     }
 
     void resetRound()
@@ -166,7 +167,7 @@ public class Move : MonoBehaviour
 
     void resetCamera()
     {
-        CameraMovement.setCameraPos(cameraPos.x, cameraPos.y, cameraPos.z);
+        CameraMovement.setCameraPos(CameraMovement.cameraStartingPos.transform.position);
         Camera.main.transform.eulerAngles = cameraAngle;
     }
 }

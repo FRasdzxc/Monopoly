@@ -6,30 +6,39 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     Rigidbody rb;
+    public GameObject camera1;
+    public GameObject camera2;
+    public GameObject camera3;
+    public GameObject camera4;
+    public GameObject cameraStarting;
+    public static GameObject cameraPos1;
+    public static GameObject cameraPos2;
+    public static GameObject cameraPos3;
+    public static GameObject cameraPos4;
+    public static GameObject cameraStartingPos;
     public static Vector3 cameraVelocity;
-    static float x;
-    static float y;
-    static float z;
+    static Vector3 cameraPos;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        x = Camera.main.transform.position.x;
-        y = Camera.main.transform.position.y;
-        z = Camera.main.transform.position.z;
+        cameraPos1 = camera1;
+        cameraPos2 = camera2;
+        cameraPos3 = camera3;
+        cameraPos4 = camera4;
+        cameraStartingPos = cameraStarting;
     }
 
     // Update is called once per frame
     void Update()
     {
         cameraVelocity = rb.velocity;
-        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(x, y, z), 0.005f);
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, cameraPos, 0.03f);
     }
-    public static void setCameraPos(float a, float b, float c)
+    public static void setCameraPos(Vector3 x)
     {
-        x = a;
-        y = b;
-        z = c;
+        cameraPos = x;
     }
 }

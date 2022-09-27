@@ -5,6 +5,8 @@ using UnityEngine;
 public class CheckCollision : MonoBehaviour
 {
     Vector3 diceVelocity;
+    public AudioSource source;
+    public AudioClip diceHitOnBoard;
     public static GameObject p1;
     public static GameObject p2;
     public static GameObject p3;
@@ -101,6 +103,11 @@ public class CheckCollision : MonoBehaviour
         {
             Debug.Log("HELLO");
             Move.arrived = true;
+        }
+        if (other.gameObject.tag == "Dice")
+        {
+            Debug.Log("WTF");
+            source.PlayOneShot(diceHitOnBoard);
         }
     }
     public static void setAllActive()
