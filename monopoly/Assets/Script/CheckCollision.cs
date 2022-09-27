@@ -7,6 +7,7 @@ public class CheckCollision : MonoBehaviour
     Vector3 diceVelocity;
     public AudioSource source;
     public AudioClip diceHitOnBoard;
+    public AudioClip chessHitOnBoard;
     public static GameObject p1;
     public static GameObject p2;
     public static GameObject p3;
@@ -101,12 +102,11 @@ public class CheckCollision : MonoBehaviour
     {
         if (other.gameObject.tag == "checker")
         {
-            Debug.Log("HELLO");
+            source.PlayOneShot(chessHitOnBoard);
             Move.arrived = true;
-        }
+        }else
         if (other.gameObject.tag == "Dice")
         {
-            Debug.Log("WTF");
             source.PlayOneShot(diceHitOnBoard);
         }
     }

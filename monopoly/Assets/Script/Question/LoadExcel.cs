@@ -25,6 +25,11 @@ public class LoadExcel : MonoBehaviour
     public static int p3Score = 0;
     public static int p4Score = 0;
     public static bool endGame = false;
+    public AudioSource source;
+    public AudioClip winnerClip;
+    public AudioClip deductMarkClip;
+    public AudioClip yeahClip;
+    public AudioClip correctClip;
 
     void Start()
     {
@@ -72,6 +77,7 @@ public class LoadExcel : MonoBehaviour
             {
                 winnerMessage.text = "Congratulation! Green have win this game.";
             }
+            playWinnerSound();
             winnerPanel.SetActive(true);
             Time.timeScale = 0;
 
@@ -106,6 +112,7 @@ public class LoadExcel : MonoBehaviour
         {
             btn_checkAnswer.SetActive(false);
             int i = Random.Range(1, 3);
+            playYeahSound();
             questionText.text = "Congratulations! You get " + i + " score";
             Move.showQuestion = false;
             Move.answered = true;
@@ -254,10 +261,12 @@ public class LoadExcel : MonoBehaviour
             int i = Random.Range(-3, 5);
             if(i <= 0)
             {
+                playDeductMarkSound();
                 questionText.text = "Oh! You get " + i + " score";
             }
             else
             {
+                playYeahSound();
                 questionText.text = "Congratulations! You get " + i + " score";
             }
             if (Move.turn == 0)
@@ -284,6 +293,7 @@ public class LoadExcel : MonoBehaviour
             Move.showQuestion = false;
             Move.answered = true; 
             questionText.text = "+1 Score!!!";
+            playCorrectSound();
             if(Move.turn == 0)
             {
                 p1Score++;
@@ -299,5 +309,22 @@ public class LoadExcel : MonoBehaviour
             }
             await Task.Delay(3000);
         }
+    }
+    public void playCorrectSound()
+    {
+        source.PlayOneShot(correctClip);
+    }
+    public void playWinnerSound()
+    {
+        source.PlayOneShot(winnerClip);
+    }
+
+    public void playDeductMarkSound()
+    {
+        source.PlayOneShot(deductMarkClip);
+    }
+    public void playYeahSound()
+    {
+        source.PlayOneShot(yeahClip);
     }
 }

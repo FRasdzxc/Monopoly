@@ -14,6 +14,9 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject btn_Correct;
     [SerializeField] GameObject btn_Wrong;
     [SerializeField] GameObject messageBox;
+    public AudioSource source;
+    public AudioClip correctClip;
+    public AudioClip wrongClip;
     public Text turnTemp;
     public Text message;
     public static Text turn;
@@ -109,5 +112,14 @@ public class UIController : MonoBehaviour
         {
             turn.text = "Green";
         }
+    }
+    public void playCorrectSound()
+    {
+        source.PlayOneShot(correctClip);
+    }
+
+    public void playWrongSound()
+    {
+        source.PlayOneShot(wrongClip);
     }
 }
