@@ -6,6 +6,7 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     public Dice Dice;
+    public Material floorMat;
     public GameObject board;
     public GameObject questionPanel;
     public Vector3 cameraPos;
@@ -20,6 +21,9 @@ public class Move : MonoBehaviour
     public static bool answered = false;
     public static bool showQuestion = false;
     public static bool arrived = false;
+    public static bool playerResponse = false;
+    public static bool moveOnce = false;
+    public bool setLocationOnce = false;
     public int waitSecond;
     int playerNum;
     void Start()
@@ -36,14 +40,15 @@ public class Move : MonoBehaviour
         {
             resetPosition(i);
         }
+        floorMat.SetColor("_Color", Color.red);
         UIController.changeTurnText(0);
         ChessMovement.setDestination(Checker.RspawnPos[0].transform.position);
     }
     void Update()
     {
-        if(Dice.canMove == true)
+        if(Dice.canMove == true && setLocationOnce == false)
         {
-            currPos[turn] += Dice.diceValue;
+            currPos[turn] += Dice.diceValue; //store chess location
             if(currPos[turn] > 39)
             {
                 currPos[turn] = currPos[turn] - 39;
@@ -65,7 +70,40 @@ public class Move : MonoBehaviour
                 cameraY = 180;
             }
             pos = currPos[turn];
-            move(turn, currPos[turn]);
+            resetCamera();
+            Checker.chess[turn].AddComponent<Outline>();
+            Checker.chess[turn].tag = "chess";
+            setLocationOnce = true;
+        }
+        if (playerResponse == true)
+        {
+            if(moveOnce == false)
+            {
+                move(turn, currPos[turn]);
+                moveOnce = true;
+            }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (playerResponse == false && Dice.canMove == true)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                LayerMask layerMask = LayerMask.GetMask("chess");
+                Debug.Log("Raycast");
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+                {
+                    if(hit.transform.tag == "chess")
+                    {
+                        Debug.Log(hit.transform.name);
+                        playerResponse = true;
+                        Destroy(Checker.chess[turn].GetComponent<Outline>());
+                        Checker.chess[turn].tag = "checker";
+                    }
+
+                }
+            }
+            
         }
         if(moved == true && answered == true)
         {
@@ -79,15 +117,12 @@ public class Move : MonoBehaviour
                 Invoke("resetRound", 3);
                 moved = false;
             }
-
         }
-
     }
 
     async void move(int turns, int step)
     {
-
-        Camera.main.transform.eulerAngles = new Vector3(30, cameraY, 0);
+        Camera.main.transform.eulerAngles = new Vector3(40, cameraY, 0);
         CameraMovement.setCameraPos(CameraMovement.cameraStartingPos.transform.position);
         ChessMovement.setTurns(turns);
         UpdateChessDestination(turns, step);
@@ -95,7 +130,7 @@ public class Move : MonoBehaviour
         Dice.canMove = false;
         await Task.Delay(2500);
         showQuestion = true;
-        questionPanel.SetActive(true);
+        questionPanel.SetActive(true); //ask Question
 
         /*Camera.main.transform.position = new Vector3(Checker.chess[turns].transform.position.x + cameraX, 4, Checker.chess[turns].transform.position.z + cameraZ);*/
 
@@ -133,6 +168,7 @@ public class Move : MonoBehaviour
             arrived = false;
         }
         ChessMovement.timeToMove = false;
+        playerResponse = false;
     }
 
     void CameraUpdate(Vector3 x)
@@ -142,6 +178,30 @@ public class Move : MonoBehaviour
 
     void resetRound()
     {
+        turn++;
+        if (turn >= playerNum)
+        {
+            turn = 0;
+        }
+        if (turn == 0)
+        {
+            floorMat.SetColor("_Color", Color.red);
+        }
+        else if(turn == 1)
+        {
+            floorMat.SetColor("_Color", Color.yellow);
+        }
+        else if(turn == 2)
+        {
+            floorMat.SetColor("_Color", Color.blue);
+        }
+        else if(turn == 3)
+        {
+            floorMat.SetColor("_Color", Color.green);
+        }
+        moveOnce = false;
+        playerResponse = false;
+        setLocationOnce = false;
         resetCamera();
         Dice.resetDice();
         CheckCollision.setAllActive();
@@ -151,11 +211,6 @@ public class Move : MonoBehaviour
         LoadExcel.count = 0;
         questionPanel.SetActive(false);
         reset = true;
-        turn++;
-        if (turn >= playerNum)
-        {
-            turn = 0;
-        }
         UIController.changeTurnText(turn);
     }
 
