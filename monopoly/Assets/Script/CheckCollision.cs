@@ -100,7 +100,7 @@ public class CheckCollision : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "checker")
+        if (other.gameObject.tag == "checker" || other.gameObject.tag == "chess")
         {
             source.PlayOneShot(chessHitOnBoard);
             Move.arrived = true;

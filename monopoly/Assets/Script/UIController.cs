@@ -14,16 +14,21 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject btn_Correct;
     [SerializeField] GameObject btn_Wrong;
     [SerializeField] GameObject messageBox;
+    [SerializeField] GameObject settingPanel;
+    [SerializeField] Dropdown winningScore;
     public AudioSource source;
     public AudioClip correctClip;
     public AudioClip wrongClip;
+    public AudioClip buttonClickClip;
     public Text turnTemp;
     public Text message;
     public static Text turn;
     public static bool checkedAnswer = false;
-
+    bool openSelector = false;
+    int score;
     void Start()
     {
+        openSelector = false;
         turn = turnTemp;
     }
     void Update()
@@ -38,6 +43,21 @@ public class UIController : MonoBehaviour
             messageBox.SetActive(false);
             Move.reset = false;
         }
+        if(openSelector == true)
+        {
+            if (winningScore.value == 0)
+            {
+                score = 10;
+            }
+            if (winningScore.value == 1)
+            {
+                score = 20;
+            }
+            if (winningScore.value == 2)
+            {
+                score = 30;
+            }
+        }
     }
     public void switchScene(string name)
     {
@@ -45,11 +65,23 @@ public class UIController : MonoBehaviour
     }
     public void setPlayerNum(int num)
     {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetInt("winningScore", score);
         PlayerPrefs.SetInt("playerNum", num);
     }
+
     public void setActice(bool x)
     {
         obj.SetActive(x);
+        openSelector = true;
+    }
+    public void openSetting()
+    {
+        settingPanel.SetActive(true);
+    }
+    public void closeSetting()
+    {
+        settingPanel.SetActive(false);
     }
     public async void Correct()
     {
@@ -121,5 +153,10 @@ public class UIController : MonoBehaviour
     public void playWrongSound()
     {
         source.PlayOneShot(wrongClip);
+    }
+
+    public void playButtonClickSound()
+    {
+        source.PlayOneShot(buttonClickClip);
     }
 }

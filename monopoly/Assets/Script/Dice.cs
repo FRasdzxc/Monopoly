@@ -8,6 +8,8 @@ public class Dice : MonoBehaviour
     public GameObject rollButton;
     public GameObject scoreboardPanel;
     public GameObject turnPanel;
+    public GameObject winningScorePanel;
+    public GameObject btn_Setting;
     static Rigidbody rb;
     public static int diceValue;
     Vector3 initPosition;
@@ -30,7 +32,7 @@ public class Dice : MonoBehaviour
     }
     public void rollDice()
     {
-        if(thrown == false && landed == false)
+        if(thrown == false && landed == false && LoadExcel.endGame == false)
         {
             x = Camera.main.transform.position.x;
             y = Camera.main.transform.position.y;
@@ -39,6 +41,8 @@ public class Dice : MonoBehaviour
             rollButton.SetActive(false);
             turnPanel.SetActive(false);
             scoreboardPanel.SetActive(false);
+            winningScorePanel.SetActive(false);
+            btn_Setting.SetActive(false);
             thrown = true;
             rb.useGravity = true;
             int rX = Random.Range(-500, 500);
@@ -61,5 +65,7 @@ public class Dice : MonoBehaviour
         rollButton.SetActive(true);
         turnPanel.SetActive(true);
         scoreboardPanel.SetActive(true);
+        winningScorePanel.SetActive(true);
+        btn_Setting.SetActive(true);
     }
 }

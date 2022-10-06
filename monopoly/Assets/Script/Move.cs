@@ -23,14 +23,16 @@ public class Move : MonoBehaviour
     public static bool arrived = false;
     public static bool playerResponse = false;
     public static bool moveOnce = false;
+    bool[] allMovedOnce = new bool[4];
     public bool setLocationOnce = false;
     public int waitSecond;
     int playerNum;
+
     void Start()
     {
+        playerNum = PlayerPrefs.GetInt("playerNum");
         CameraUpdate(CameraMovement.cameraStartingPos.transform.position);
         cameraAngle = Camera.main.transform.eulerAngles;
-        playerNum = PlayerPrefs.GetInt("playerNum");
         for(int i = 0; i < playerNum; i++)
         {
             Debug.Log(Checker.chess[i].name);
@@ -40,6 +42,7 @@ public class Move : MonoBehaviour
         {
             resetPosition(i);
         }
+        turn = 0;
         floorMat.SetColor("_Color", Color.red);
         UIController.changeTurnText(0);
         ChessMovement.setDestination(Checker.RspawnPos[0].transform.position);
@@ -49,6 +52,7 @@ public class Move : MonoBehaviour
         if(Dice.canMove == true && setLocationOnce == false)
         {
             currPos[turn] += Dice.diceValue; //store chess location
+            allMovedOnce[turn] = true;
             if(currPos[turn] > 39)
             {
                 currPos[turn] = currPos[turn] - 39;
@@ -103,11 +107,11 @@ public class Move : MonoBehaviour
 
                 }
             }
-            
+
         }
-        if(moved == true && answered == true)
+        if (moved == true && answered == true)
         {
-            if(UIController.checkedAnswer == true)
+            if (UIController.checkedAnswer == true)
             {
                 resetRound();
                 moved = false;
@@ -118,8 +122,98 @@ public class Move : MonoBehaviour
                 moved = false;
             }
         }
-    }
+/*        if(playerNum == 2)
+        {
+            if (checkCollide() && allMovedOnce[0] == true && allMovedOnce[1] == true)
+            {
+                bool temp = false;
+                int num = 0;
+                Debug.Log("Collide!!");
+                for(int i = 0; i < playerNum; i++)
+                {
+                    if(turn == i)
+                    {
+                        return;
+                    }else if(currPos[turn] == currPos[i])
+                    {
+                        temp = true;
+                        if(temp == true)
+                        {
+                            num = i;
+                        }
+                    }
+                }
+                Checker.chess[turn].transform.position = new Vector3(Checker.chess[turn].transform.position.x, Checker.chess[turn].transform.position.y, Checker.chess[turn].transform.position.z - 0.1f);
+                Checker.chess[num].transform.position = new Vector3(Checker.chess[turn].transform.position.x, Checker.chess[turn].transform.position.y, Checker.chess[turn].transform.position.z + 0.1f);
+            }
+        }
+        if(playerNum == 3)
+        {
+            if (checkCollide() && allMovedOnce[0] == true && allMovedOnce[1] == true && allMovedOnce[2] == true)
+            {
+                bool temp = false;
+                int num = 0;
+                Debug.Log("Collide!!");
+                for (int i = 0; i < playerNum; i++)
+                {
+                    if (turn == i)
+                    {
+                        return;
+                    }
+                    else if (currPos[turn] == currPos[i])
+                    {
+                        temp = true;
+                        if (temp == true)
+                        {
+                            num = i;
+                        }
+                    }
+                }
+                Checker.chess[turn].transform.position = new Vector3(Checker.chess[turn].transform.position.x, Checker.chess[turn].transform.position.y, Checker.chess[turn].transform.position.z - 0.1f);
+                Checker.chess[num].transform.position = new Vector3(Checker.chess[turn].transform.position.x, Checker.chess[turn].transform.position.y, Checker.chess[turn].transform.position.z + 0.1f);
+            }
+        }
+        if(playerNum == 4)
+        {
+            if (checkCollide())
+            {
+                bool temp = false;
+                int num = 0;
+                Debug.Log("Collide!!");
+                for (int i = 0; i < playerNum; i++)
+                {
+                    if (i == turn) continue;
+                    if (currPos[turn] == currPos[i])
+                    {
+                        num = i;
+                    }
+                }
+                if(arrived == true && temp == false)
+                {
+                    temp = true;
+                    ChessMovement.updateCollisionChessPos(new Vector3(Checker.chess[turn].transform.position.x, Checker.chess[turn].transform.position.y, Checker.chess[turn].transform.position.z - 0.1f), turn);
+                    ChessMovement.updateCollisionChessPos(new Vector3(Checker.chess[turn].transform.position.x, Checker.chess[turn].transform.position.y, Checker.chess[turn].transform.position.z + 0.1f), num);
+                }
+            }
+        }*/
 
+    }
+/*    bool checkCollideRed()
+    {
+        return (currPos[0] == currPos[1] || currPos[0] == currPos[2] || currPos[0] == currPos[3]);
+    }
+    bool checkCollideYellow()
+    {
+        return (currPos[1] == currPos[0] || currPos[1] == currPos[2] || currPos[1] == currPos[3]);
+    }
+    bool checkCollideBlue()
+    {
+        return (currPos[2] == currPos[0] || currPos[2] == currPos[1] || currPos[2] == currPos[3]);
+    }
+    bool checkCollideGreen()
+    {
+        return (currPos[3] == currPos[0] || currPos[3] == currPos[1] || currPos[3] == currPos[2]);
+    }*/
     async void move(int turns, int step)
     {
         Camera.main.transform.eulerAngles = new Vector3(40, cameraY, 0);
@@ -164,9 +258,10 @@ public class Move : MonoBehaviour
             {
                 await Task.Delay(1);
             }
-            Checker.chess[index].transform.position = ChessMovement.destination;
             arrived = false;
+            Checker.chess[index].transform.position = ChessMovement.destination;
         }
+        arrived = true;
         ChessMovement.timeToMove = false;
         playerResponse = false;
     }

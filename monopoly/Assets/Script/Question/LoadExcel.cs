@@ -30,9 +30,11 @@ public class LoadExcel : MonoBehaviour
     public AudioClip deductMarkClip;
     public AudioClip yeahClip;
     public AudioClip correctClip;
-
+    int winningScore;
     void Start()
     {
+        endGame = false;
+        winningScore = PlayerPrefs.GetInt("winningScore");
         path = Application.dataPath + "/StreamingAssets/QuestionDatabase.csv";
         winnerPanel.SetActive(false);
         LoadQuestionData();
@@ -60,7 +62,7 @@ public class LoadExcel : MonoBehaviour
         p2ScoreText.text = p2Score.ToString();
         p3ScoreText.text = p3Score.ToString();
         p4ScoreText.text = p4Score.ToString();
-        if(p1Score >= 30 || p2Score >= 30 || p3Score >= 30 || p4Score >= 30)
+        if(p1Score >= winningScore || p2Score >= winningScore || p3Score >= winningScore || p4Score >= winningScore)
         {
             if(Move.turn == 0)
             {
@@ -77,10 +79,9 @@ public class LoadExcel : MonoBehaviour
             {
                 winnerMessage.text = "Congratulation! Green have win this game.";
             }
+            endGame = true;
             playWinnerSound();
             winnerPanel.SetActive(true);
-            Time.timeScale = 0;
-
         }
     }
     public void LoadQuestionData()
@@ -118,19 +119,19 @@ public class LoadExcel : MonoBehaviour
             Move.answered = true;
             if (Move.turn == 0)
             {
-                p1Score = p1Score + i;
+                p1Score += i;
             }
             else if (Move.turn == 1)
             {
-                p2Score = p2Score + i;
+                p2Score += i;
             }
             else if (Move.turn == 2)
             {
-                p3Score = p3Score + i;
+                p3Score += i;
             }
             else if (Move.turn == 3)
             {
-                p4Score = p4Score + i;
+                p4Score += i;
             }
             await Task.Delay(3000);
         }

@@ -10,11 +10,6 @@ public class ChessMovement : MonoBehaviour
     public float pLerp = 0.005f;
     public float rLerp = 0.01f;
     public static bool timeToMove = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -25,7 +20,7 @@ public class ChessMovement : MonoBehaviour
             animationTime = animationTime % 0.2f;
             Checker.chess[turns].transform.position = MathParabola.Parabola(Checker.chess[turns].transform.position, destination, 0.2f, animationTime / 0.2f);
         }
-            /*Checker.chess[turns].transform.position = Vector3.Lerp(Checker.chess[turns].transform.position, destination, pLerp);*/ //Move in a straight line
+        /*Checker.chess[turns].transform.position = Vector3.Lerp(Checker.chess[turns].transform.position, destination, pLerp);*/ //Move in a straight line
     }
     public static void setTurns(int turn)
     {
@@ -35,5 +30,13 @@ public class ChessMovement : MonoBehaviour
     public static void setDestination(Vector3 step)
     {
         destination = step;
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        Debug.Log("hello");
+    }
+    public static void updateCollisionChessPos(Vector3 pos, int chess)
+    {
+        Checker.chess[chess].transform.position = pos;
     }
 }
