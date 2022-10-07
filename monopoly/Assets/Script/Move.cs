@@ -27,6 +27,7 @@ public class Move : MonoBehaviour
     public bool setLocationOnce = false;
     public int waitSecond;
     int playerNum;
+    public static string direction;
 
     void Start()
     {
@@ -60,18 +61,22 @@ public class Move : MonoBehaviour
             if (currPos[turn] > 10 && currPos[turn] <= 20)
             {
                 cameraY = 270;
+                direction = "Side2";
             }
             else if (currPos[turn] > 20 && currPos[turn] <= 30)
             {
                 cameraY = 0;
+                direction = "Side3";
             }
             else if (currPos[turn] > 30 && currPos[turn] <= 39)
             {
                 cameraY = 90;
+                direction = "Side4";
             }
             else if (currPos[turn] >= 0 && currPos[turn] <= 10)
             {
                 cameraY = 180;
+                direction = "Side1";
             }
             pos = currPos[turn];
             resetCamera();

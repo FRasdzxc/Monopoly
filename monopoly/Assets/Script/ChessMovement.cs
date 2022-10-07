@@ -31,10 +31,6 @@ public class ChessMovement : MonoBehaviour
     {
         destination = step;
     }
-    private void OnCollisionStay(Collision collision)
-    {
-        Debug.Log("hello");
-    }
     public static void updateCollisionChessPos(Vector3 pos, int chess)
     {
         Checker.chess[chess].transform.position = pos;
