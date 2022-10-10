@@ -62,6 +62,7 @@ public class UIController : MonoBehaviour
     public void switchScene(string name)
     {
         SceneManager.LoadScene(name);
+        Time.timeScale = 1;
     }
     public void setPlayerNum(int num)
     {

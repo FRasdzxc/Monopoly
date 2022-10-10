@@ -35,6 +35,7 @@ public class LoadExcel : MonoBehaviour
     {
         endGame = false;
         winningScore = PlayerPrefs.GetInt("winningScore");
+        winningScore = 1;
         path = Application.dataPath + "/StreamingAssets/QuestionDatabase.csv";
         winnerPanel.SetActive(false);
         LoadQuestionData();
@@ -64,23 +65,22 @@ public class LoadExcel : MonoBehaviour
         p4ScoreText.text = p4Score.ToString();
         if(p1Score >= winningScore || p2Score >= winningScore || p3Score >= winningScore || p4Score >= winningScore)
         {
-            if(Move.turn == 0)
+            if(Move.turn == 0 && endGame == false)
             {
                 winnerMessage.text = "Congratulation! Red have win this game.";
-            }else if(Move.turn == 1)
+            }else if(Move.turn == 1 && endGame == false)
             {
                 winnerMessage.text = "Congratulation! Yellow have win this game.";
             }
-            else if(Move.turn == 2)
+            else if(Move.turn == 2 && endGame == false)
             {
                 winnerMessage.text = "Congratulation! Blue have win this game.";
             }
-            else if(Move.turn == 3)
+            else if(Move.turn == 3 && endGame == false)
             {
                 winnerMessage.text = "Congratulation! Green have win this game.";
             }
             endGame = true;
-            playWinnerSound();
             winnerPanel.SetActive(true);
         }
     }
@@ -256,11 +256,51 @@ public class LoadExcel : MonoBehaviour
         }
         else if (Move.pos == 7 || Move.pos == 22 || Move.pos == 36)
         {
+            int loop = 0;
+            string symbol;
+            int mark;
             btn_checkAnswer.SetActive(false);
             Move.showQuestion = false;
             Move.answered = true;
             int i = Random.Range(-3, 5);
-            if(i <= 0)
+            if(i < 0)
+            {
+                symbol = "-";
+                mark = -i;
+            }else
+            {
+                symbol = "+";
+                mark = i;
+            }
+            do
+            {
+                string str_temp = "+";
+                int int_temp = 0;
+                for(int o = 0; o < 100; o++)
+                {
+                    if(loop == 0)
+                        questionText.text = str_temp + " " + int_temp;
+                    if(loop == 1)
+                        questionText.text = symbol + " " + int_temp;
+                    int_temp++;
+                    if(int_temp == 5)
+                    {
+                        int_temp = 0;
+                    }
+                    if(str_temp == "+")
+                    {
+                        str_temp = "-";
+                    }
+                    else
+                    {
+                        str_temp = "+";
+                    }
+                    await Task.Delay(10);
+                }
+                loop++;
+            } while (loop != 2);
+            await Task.Delay(2000);
+            if (i <= 0)
             {
                 playDeductMarkSound();
                 questionText.text = "Oh! You get " + i + " score";
@@ -286,7 +326,7 @@ public class LoadExcel : MonoBehaviour
             {
                 p4Score = p4Score + i;
             }
-            await Task.Delay(3000);
+
         }
         else
         {

@@ -45,11 +45,11 @@ public class Dice : MonoBehaviour
             btn_Setting.SetActive(false);
             thrown = true;
             rb.useGravity = true;
-            int rX = Random.Range(-500, 500);
-            int rY = Random.Range(-500, 500);
-            int rZ = Random.Range(-500, 500);
+            int rX = Random.Range(0, 500);
+            int rY = Random.Range(0, 500);
+            int rZ = Random.Range(0, 500);
             transform.rotation = Quaternion.identity;
-            rb.AddForce(transform.up * Random.Range(200, 500));
+            rb.AddForce(transform.up * 400);
             rb.AddTorque(rX, rY, rZ);
         }
     }
