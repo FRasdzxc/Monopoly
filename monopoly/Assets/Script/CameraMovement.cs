@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     Rigidbody rb;
+    public static bool arrivedNewPosition = false;
     public GameObject camera1;
     public GameObject camera2;
     public GameObject camera3;
@@ -17,7 +18,10 @@ public class CameraMovement : MonoBehaviour
     public static GameObject cameraPos4;
     public static GameObject cameraStartingPos;
     public static Vector3 cameraVelocity;
+    public static bool isMoving = false;
     static Vector3 cameraPos;
+    static Vector3 cameraAngle;
+    Vector3 previousPos;
     
 
     // Start is called before the first frame update
@@ -29,6 +33,7 @@ public class CameraMovement : MonoBehaviour
         cameraPos3 = camera3;
         cameraPos4 = camera4;
         cameraStartingPos = cameraStarting;
+        cameraAngle = Camera.main.transform.eulerAngles;
     }
 
     // Update is called once per frame
@@ -36,9 +41,34 @@ public class CameraMovement : MonoBehaviour
     {
         cameraVelocity = rb.velocity;
         Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, cameraPos, 0.03f);
+        if(isMoving == true)
+        {
+            previousPos = Camera.main.transform.position;
+            Invoke("GetCameraPos", 0.1f);
+            if(previousPos == GetCameraPos())
+            {
+                arrivedNewPosition = true;
+                isMoving = false;
+            }
+        }
     }
     public static void setCameraPos(Vector3 x)
     {
         cameraPos = x;
+        isMoving = true;
+        arrivedNewPosition = false;
+    }
+    Vector3 GetCameraPos()
+    {
+        return Camera.main.transform.position;
+    }
+    public static void ZoomIn(Vector3 pos)
+    {
+        cameraPos = pos;
+    }
+    public static void ResetCameraPos()
+    {
+        cameraPos = cameraStartingPos.transform.position;
+        Camera.main.transform.eulerAngles = cameraAngle;
     }
 }

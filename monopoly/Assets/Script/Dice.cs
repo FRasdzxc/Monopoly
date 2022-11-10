@@ -18,6 +18,7 @@ public class Dice : MonoBehaviour
     float z;
     bool thrown = false;
     bool landed = false;
+    bool runOnce = false;
     public static Vector3 diceVelocity;
     public static bool canMove = false;
     void Start()
@@ -29,15 +30,33 @@ public class Dice : MonoBehaviour
     void Update()
     {
         diceVelocity = rb.velocity;
+        if(LoadExcel.endGame == true && runOnce == false)
+        {
+            rollButton.SetActive(false);
+            turnPanel.SetActive(false);
+            scoreboardPanel.SetActive(false);
+            winningScorePanel.SetActive(false);
+            btn_Setting.SetActive(false);
+            runOnce = true;
+        }
+        if(canMove == true)
+        {
+            rollButton.SetActive(false);
+            turnPanel.SetActive(false);
+            scoreboardPanel.SetActive(false);
+            winningScorePanel.SetActive(false);
+            btn_Setting.SetActive(false);
+        }
     }
     public void rollDice()
     {
         if(thrown == false && landed == false && LoadExcel.endGame == false)
         {
+            CheckCollision.count = 0;
             x = Camera.main.transform.position.x;
             y = Camera.main.transform.position.y;
             z = Camera.main.transform.position.z;
-            CameraMovement.setCameraPos(new Vector3(x, y - 7, z)); //Camera Zoom In
+            CameraMovement.ZoomIn(new Vector3(x, y - 7, z)); //Camera Zoom In
             rollButton.SetActive(false);
             turnPanel.SetActive(false);
             scoreboardPanel.SetActive(false);

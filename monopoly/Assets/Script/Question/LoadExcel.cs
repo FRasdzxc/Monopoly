@@ -30,12 +30,14 @@ public class LoadExcel : MonoBehaviour
     public AudioClip deductMarkClip;
     public AudioClip yeahClip;
     public AudioClip correctClip;
+    public GameObject ps;
+    bool playOnce = false;
     int winningScore;
     void Start()
     {
         endGame = false;
+        playOnce = false;
         winningScore = PlayerPrefs.GetInt("winningScore");
-        winningScore = 1;
         path = Application.dataPath + "/StreamingAssets/QuestionDatabase.csv";
         winnerPanel.SetActive(false);
         LoadQuestionData();
@@ -47,9 +49,21 @@ public class LoadExcel : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            p1Score = p1Score + 30;
+            p1Score += 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            p2Score += 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            p3Score += 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            p4Score += 1;
         }
         if (Move.showQuestion == true)
         {
@@ -65,23 +79,30 @@ public class LoadExcel : MonoBehaviour
         p4ScoreText.text = p4Score.ToString();
         if(p1Score >= winningScore || p2Score >= winningScore || p3Score >= winningScore || p4Score >= winningScore)
         {
-            if(Move.turn == 0 && endGame == false)
+            if(playOnce == false)
             {
-                winnerMessage.text = "Congratulation! Red have win this game.";
-            }else if(Move.turn == 1 && endGame == false)
-            {
-                winnerMessage.text = "Congratulation! Yellow have win this game.";
+                if(Move.turn == 0 && endGame == false)
+                {
+                    winnerMessage.text = "Congratulation! Red have win this game.";
+                }else if(Move.turn == 1 && endGame == false)
+                {
+                    winnerMessage.text = "Congratulation! Yellow have win this game.";
+                }
+                else if(Move.turn == 2 && endGame == false)
+                {
+                    winnerMessage.text = "Congratulation! Blue have win this game.";
+                }
+                else if(Move.turn == 3 && endGame == false)
+                {
+                    winnerMessage.text = "Congratulation! Green have win this game.";
+                }
+                endGame = true;
+                ps.SetActive(true);
+                winnerPanel.SetActive(true);
+                playWinnerSound();
+                playOnce = true;
+                Move.ResetData();
             }
-            else if(Move.turn == 2 && endGame == false)
-            {
-                winnerMessage.text = "Congratulation! Blue have win this game.";
-            }
-            else if(Move.turn == 3 && endGame == false)
-            {
-                winnerMessage.text = "Congratulation! Green have win this game.";
-            }
-            endGame = true;
-            winnerPanel.SetActive(true);
         }
     }
     public void LoadQuestionData()
@@ -260,8 +281,6 @@ public class LoadExcel : MonoBehaviour
             string symbol;
             int mark;
             btn_checkAnswer.SetActive(false);
-            Move.showQuestion = false;
-            Move.answered = true;
             int i = Random.Range(-3, 5);
             if(i < 0)
             {
@@ -299,7 +318,8 @@ public class LoadExcel : MonoBehaviour
                 }
                 loop++;
             } while (loop != 2);
-            await Task.Delay(2000);
+            questionText.text = symbol + " " + mark;
+            await Task.Delay(1000);
             if (i <= 0)
             {
                 playDeductMarkSound();
@@ -326,7 +346,9 @@ public class LoadExcel : MonoBehaviour
             {
                 p4Score = p4Score + i;
             }
-
+            Move.showQuestion = false;
+            Move.answered = true;
+            await Task.Delay(2000);
         }
         else
         {
