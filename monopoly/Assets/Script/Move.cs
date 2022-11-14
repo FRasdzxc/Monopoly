@@ -13,7 +13,8 @@ public class Move : MonoBehaviour
     public Vector3 cameraAtChessPos;
     public Vector3 cameraAngle;
     public static int turn = 0;
-    int cameraY = 0;
+    public static int cameraY = 180;
+    public static int cameraX = 90;
     public static int pos;
     public int[] currPos = new int[4];
     bool moved = false;
@@ -161,7 +162,7 @@ public class Move : MonoBehaviour
     }
     void move(int turns, int step)
     {
-        Camera.main.transform.eulerAngles = new Vector3(40, cameraY, 0);
+        cameraX = 40;
         CameraMovement.setCameraPos(CameraMovement.cameraStartingPos.transform.position);
         ChessMovement.setTurns(turns);
         UpdateChessDestination(turns, step);
@@ -196,7 +197,7 @@ public class Move : MonoBehaviour
         }
         while (CameraMovement.arrivedNewPosition == false)
         {
-            await Task.Delay(1000);
+            await Task.Delay(10);
         }
         while (count != step)
         {
@@ -260,6 +261,8 @@ public class Move : MonoBehaviour
         setLocationOnce = false;
         UIController.checkedAnswer = false;
         answered = false;
+        cameraX = 90;
+        cameraY = 180;
         showQuestion = false;
         questionPanel.SetActive(false);
         reset = true;

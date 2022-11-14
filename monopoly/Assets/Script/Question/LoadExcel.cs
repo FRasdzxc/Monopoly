@@ -81,18 +81,18 @@ public class LoadExcel : MonoBehaviour
         {
             if(playOnce == false)
             {
-                if(Move.turn == 0 && endGame == false)
+                if(p1Score >= winningScore && endGame == false)
                 {
                     winnerMessage.text = "Congratulation! Red have win this game.";
-                }else if(Move.turn == 1 && endGame == false)
+                }else if(p2Score >= winningScore && endGame == false)
                 {
                     winnerMessage.text = "Congratulation! Yellow have win this game.";
                 }
-                else if(Move.turn == 2 && endGame == false)
+                else if(p3Score >= winningScore && endGame == false)
                 {
                     winnerMessage.text = "Congratulation! Blue have win this game.";
                 }
-                else if(Move.turn == 3 && endGame == false)
+                else if(p4Score >= winningScore && endGame == false)
                 {
                     winnerMessage.text = "Congratulation! Green have win this game.";
                 }

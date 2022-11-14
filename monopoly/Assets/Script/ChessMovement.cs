@@ -10,6 +10,7 @@ public class ChessMovement : MonoBehaviour
     public float pLerp = 0.005f;
     public float rLerp = 0.01f;
     public static bool timeToMove = false;
+    [SerializeField] float speed = 5f;
 
     // Update is called once per frame
     void Update()

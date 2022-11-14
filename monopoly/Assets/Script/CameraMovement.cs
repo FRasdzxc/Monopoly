@@ -40,7 +40,8 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         cameraVelocity = rb.velocity;
-        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, cameraPos, 0.03f);
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, cameraPos, 5f * Time.deltaTime);
+        Camera.main.transform.eulerAngles = Vector3.Lerp(Camera.main.transform.eulerAngles, new Vector3(Move.cameraX, Move.cameraY, 0), 5f * Time.deltaTime);
         if(isMoving == true)
         {
             previousPos = Camera.main.transform.position;
@@ -69,6 +70,5 @@ public class CameraMovement : MonoBehaviour
     public static void ResetCameraPos()
     {
         cameraPos = cameraStartingPos.transform.position;
-        Camera.main.transform.eulerAngles = cameraAngle;
     }
 }
