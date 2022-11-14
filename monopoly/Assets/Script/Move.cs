@@ -38,6 +38,8 @@ public class Move : MonoBehaviour
             resetPosition(i);
         }
         turn = 0;
+        cameraX = 90;
+        cameraY = 180;
         floorMat.SetColor("_Color", Color.red);
         UIController.changeTurnText(0);
         ChessMovement.setDestination(Checker.RspawnPos[0].transform.position);
