@@ -215,7 +215,7 @@ public class Move : MonoBehaviour
         }
         arrived = true;
         ChessMovement.timeToMove = false;
-        await Task.Delay(1000);
+        await Task.Delay(1500);
         AskQuestion();
         playerResponse = false;
     }
