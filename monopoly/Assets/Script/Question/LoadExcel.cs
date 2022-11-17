@@ -38,7 +38,8 @@ public class LoadExcel : MonoBehaviour
         endGame = false;
         playOnce = false;
         winningScore = PlayerPrefs.GetInt("winningScore");
-        path = Application.dataPath + "/StreamingAssets/QuestionDatabase.csv";
+/*        path = Application.dataPath + "/StreamingAssets/QuestionDatabase.csv";*/
+        path = "jar:file://" + Application.dataPath + "!/assets/QuestionDatabase.csv";
         winnerPanel.SetActive(false);
         LoadQuestionData();
         count = 0;
