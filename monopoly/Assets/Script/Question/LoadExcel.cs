@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class LoadExcel : MonoBehaviour
@@ -33,15 +35,25 @@ public class LoadExcel : MonoBehaviour
     public GameObject ps;
     bool playOnce = false;
     int winningScore;
+
+
+
     void Start()
     {
         endGame = false;
         playOnce = false;
         winningScore = PlayerPrefs.GetInt("winningScore");
 /*        path = Application.dataPath + "/StreamingAssets/QuestionDatabase.csv";*/
+
+#if UNITY_EDITOR
+        path = Application.dataPath + "/StreamingAssets/QuestionDatabase.csv";
+#endif
+
+#if UNITY_ANDROID && !UNITY_EDITOR
         path = "jar:file://" + Application.dataPath + "!/assets/QuestionDatabase.csv";
+#endif
         winnerPanel.SetActive(false);
-        LoadQuestionData();
+        StartCoroutine(LoadQuestionData());
         count = 0;
         p1Score = 0;
         p2Score = 0;
@@ -106,9 +118,10 @@ public class LoadExcel : MonoBehaviour
             }
         }
     }
-    public void LoadQuestionData()
+    public IEnumerator LoadQuestionData()
     {
         questionDatabase.Clear(); //clear database
+#if UNITY_EDITOR
         StreamReader strReader = new StreamReader(path); //read CSV files
         Debug.Log(path);
         string line = strReader.ReadLine();
@@ -121,6 +134,41 @@ public class LoadExcel : MonoBehaviour
             line = strReader.ReadLine();
         }   
         strReader.Close();
+#endif
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        //string data = string.Empty;
+        //FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+        //StreamReader sr = new StreamReader(fs);
+        //data = sr.ReadLine();
+        //while (data != null)
+        //{
+        //    questionDatabase.Add(new Question());
+            
+        //    string[] items = data.Split(',', '\n');
+        //    questionDatabase[questionDatabase.Count - 1].SetQuestion(items[0]);
+        //    questionDatabase[questionDatabase.Count - 1].SetAnswer(items[1]);
+        //    data = strReader.ReadLine();
+        //}   
+        //sr.Close();
+        //fs.Close();
+        WWW www = new WWW(path);
+        yield return www;
+        if (!string.IsNullOrEmpty(www.error))
+        {
+            Debug.LogError("Can't read");
+        }
+        string item = www.text;
+        string[] list = item.Split(',', '\n');
+        for(int i = 0; i < list.Length; i++)
+        {
+            questionDatabase.Add(new Question());
+            questionDatabase[questionDatabase.Count - 1].SetQuestion(list[i]);
+            questionDatabase[questionDatabase.Count - 1].SetAnswer(list[i + 1]);
+            i++;
+        }
+#endif
+        yield return null;
     }
     public async void showQuestion()
     {

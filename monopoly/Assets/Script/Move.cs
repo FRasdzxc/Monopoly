@@ -174,7 +174,6 @@ public class Move : MonoBehaviour
     }
     void AskQuestion()
     {
-        showQuestion = true;
         questionPanel.SetActive(true); //ask Question
     }
     async void UpdateChessDestination(int index, int step)
@@ -214,6 +213,7 @@ public class Move : MonoBehaviour
             Checker.chess[index].transform.position = ChessMovement.destination;
         }
         arrived = true;
+        showQuestion = true;
         ChessMovement.timeToMove = false;
         await Task.Delay(1500);
         AskQuestion();
